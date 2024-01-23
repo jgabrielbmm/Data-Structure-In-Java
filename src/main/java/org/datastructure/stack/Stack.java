@@ -1,6 +1,7 @@
 package org.datastructure.stack;
 
-import java.util.Date;
+import org.datastructure.Node;
+
 import java.util.EmptyStackException;
 
 public class Stack<T> {
@@ -14,7 +15,7 @@ public class Stack<T> {
 
     public void push(T data){
         Node<T> node = new Node<>(data);
-        if(this.top != null)
+        if(this.isEmpty())
             node.setNext(this.top);
 
         this.top = node;
@@ -22,7 +23,7 @@ public class Stack<T> {
     }
 
     public Node<T> pop(){
-        if(this.top == null)
+        if(this.isEmpty())
             throw new EmptyStackException();
 
         Node<T> removedNode = this.top;
@@ -35,8 +36,12 @@ public class Stack<T> {
         return this.top;
     }
 
+    public boolean isEmpty(){
+        return this.size == 0;
+    }
+
     public Integer size(){
-        return size;
+        return this.size;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package org.datastructure.stack;
+package org.datastructure;
 
 public class Node<T> {
     private T data;
