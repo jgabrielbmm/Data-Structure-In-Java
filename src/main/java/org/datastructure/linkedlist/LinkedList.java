@@ -2,6 +2,7 @@ package org.datastructure.linkedlist;
 
 import org.datastructure.Node;
 import org.datastructure.exceptions.IndexOutOfRangerException;
+import org.datastructure.exceptions.LinkedListIsEmptyException;
 
 public class LinkedList<T> {
     private Node<T> head;
@@ -65,6 +66,60 @@ public class LinkedList<T> {
             newNode.setNext(auxNode.getNext());
             auxNode.setNext(newNode);
         }
+    }
+
+    public Node<T> getNode(int index){
+        if(index >= this.size()){
+            throw new IndexOutOfRangerException("Index out of linked list ranger.");
+        }
+
+        Node<T> current = this.head;
+        for(int i = 0; i < index; i++){
+            current = current.getNext();
+        }
+        return current;
+    }
+
+    public T get(int index){
+        return getNode(index).getData();
+    }
+
+    public Node<T> remove(){
+        if(isEmpty()){
+            throw new LinkedListIsEmptyException("Linked list is already empty");
+        }
+
+        Node<T> current = this.head;
+        Node<T> auxNode = this.head;
+        while (current.getNext() != null){
+            auxNode = current;
+            current = current.getNext();
+        }
+
+        auxNode.setNext(null);
+        return current;
+    }
+
+    public Node<T> remove(int index){
+        Integer size = this.size();
+        if(index >= size){
+            throw new IndexOutOfRangerException("Index out of linked list ranger.");
+        }
+
+        Node<T> auxNode = this.head;
+        if(index == 0){
+            this.head = this.head.getNext();
+            return auxNode;
+        }
+
+        for(int i = 0; i < index - 1; i++){
+            auxNode = auxNode.getNext();
+        }
+
+        Node<T> removedNode = auxNode.getNext();
+        auxNode.setNext(auxNode.getNext().getNext());
+        return removedNode;
+
     }
 
 
